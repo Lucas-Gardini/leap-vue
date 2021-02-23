@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Leap year with vue</title>
+	</head>
+	<body>
+		<div id="main">
+			<label for="year">Insert the year you want</label>
+			<input id="year" type="number" v-model.number="year" />
+			<br />
+			<label v-html="returning_data"></label>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script>
+			const vue = new Vue({
+				el: "#main",
+				data() {
+					return {
+						year: null,
+						returning_data: "",
+					};
+				},
+				watch: {
+					year(value) {
+						return this.verifyYear(value);
+					},
+				},
+				methods: {
+					verifyYear(year) {
+						new Date(year, 1, 29).getMonth() == 1
+							? (this.returning_data = "Esse ano é bixesto!")
+							: (this.returning_data = "Esse ano não é bixesto!");
+					},
+				},
+			});
+		</script>
+	</body>
+</html>
